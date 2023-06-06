@@ -4,11 +4,13 @@ const Contacts = ({ contacts }) => {
   console.log('contacts', contacts);
   return (
     <ul>
-      {contacts.map(({ id, name }) => {
-        console.log(id, name);
+      {contacts.map(({ id, name, number }) => {
+        console.log(id, name, number);
         return (
           <li key={id}>
-            <span>{name}</span>
+            <span>
+              {name}: {number}
+            </span>
           </li>
         );
       })}
