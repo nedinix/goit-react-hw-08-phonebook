@@ -5,6 +5,7 @@ class Form extends Component {
   state = {
     name: '',
     number: '',
+    filter: '',
   };
 
   nameInputId = nanoid();
@@ -25,7 +26,7 @@ class Form extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
