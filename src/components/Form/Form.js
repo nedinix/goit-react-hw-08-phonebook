@@ -5,19 +5,19 @@ class Form extends Component {
   state = {
     name: '',
   };
-  nameInputId = nanoid();
+
+  generateId = () => nanoid();
 
   handleNameChange = e => {
-    const { name, id, value } = e.currentTarget;
-    this.setState({ [name]: value, id: id });
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value, id: this.generateId() });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmitForm(this.state);
+    this.props.onSubmitForm({ ...this.state });
     this.reset();
-    console.log(this.state);
   };
 
   reset = () => {
