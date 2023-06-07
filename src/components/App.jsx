@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form from './Form/Form';
-import Contacts from './Contacts/Contacts';
-import FilterInput from './Filter/Filter';
+import Form from './Form';
+import Contacts from './Contacts';
+import FilterInput from './Filter';
 
 class App extends Component {
   state = {
@@ -53,7 +53,7 @@ class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
+      <div className='container'>
         <div>
           <h3>Phonebook</h3>
           <Form onSubmitForm={this.formSubmitHandler} />
