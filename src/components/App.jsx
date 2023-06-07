@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from './Form/Form';
 import Contacts from './Contacts';
 import FilterInput from './Filter';
+import { Container } from './App.styled';
 
 class App extends Component {
   state = {
@@ -16,18 +17,16 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
-    this.setState(({ contacts }) => {
-      const contactExist = contacts
-        .map(({ name }) => name.toLowerCase())
-        .includes(data.name.toLowerCase());
+    const { contacts } = this.state;
+    const contactExist = contacts
+      .map(({ name }) => name.toLowerCase())
+      .includes(data.name.toLowerCase());
 
-      if (contactExist) {
-        alert(`${data.name} is already in contacts`);
-        return { contacts };
-      }
-
-      return { contacts: [...contacts, data] };
-    });
+    if (contactExist) {
+      alert(`${data.name} is already in contacts`);
+      return { contacts };
+    }
+    this.setState(({ contacts }) => ({ contacts: [...contacts, data] }));
   };
 
   handleFilterChange = e => {
@@ -53,7 +52,7 @@ class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div className="container">
+      <Container>
         <div>
           <h3>Phonebook</h3>
           <Form onSubmitForm={this.formSubmitHandler} />
@@ -68,7 +67,7 @@ class App extends Component {
             />
           )}
         </div>
-      </div>
+      </Container>
     );
   }
 }
