@@ -4,6 +4,7 @@ import {
   StyledContacts,
   StyledContactsItem,
   StyledContactsNumber,
+  StyledDeleteButton,
 } from './Contacts.styled';
 
 const Contacts = ({ contacts, onDeleteContact }) => (
@@ -13,7 +14,9 @@ const Contacts = ({ contacts, onDeleteContact }) => (
         <StyledContactsItem>
           {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
         </StyledContactsItem>
-        <button onClick={() => onDeleteContact(id)}>Delete</button>
+        <StyledDeleteButton onClick={() => onDeleteContact(id)}>
+          Delete
+        </StyledDeleteButton>
       </li>
     ))}
   </StyledContacts>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { StyledFormPhonebook } from './Form.styled';
+import { StyledFormPhonebook, StyledFormPhonebookButton } from './Form.styled';
 
 class Form extends Component {
   state = {
@@ -67,7 +67,9 @@ class Form extends Component {
           />
         </div>
 
-        <button type="submit">Add Contact</button>
+        <StyledFormPhonebookButton type="submit">
+          Add Contact
+        </StyledFormPhonebookButton>
       </StyledFormPhonebook>
     );
   }

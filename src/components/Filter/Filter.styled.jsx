@@ -14,6 +14,8 @@ export const StyledFilterInput = styled.input`
   border-radius: 4px;
   border: transparent;
 
+  transition: box-shadow 150ms linear, outline 150ms linear, color 100ms linear;
+
   &::placeholder {
     color: rgb(99, 99, 99);
   }
