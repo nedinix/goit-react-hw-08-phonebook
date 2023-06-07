@@ -5,11 +5,10 @@ class Form extends Component {
   state = {
     name: '',
     number: '',
-    filter: '',
   };
 
-  nameInputId = nanoid();
-  numberInputId = nanoid();
+  nameInputId = nanoid(3);
+  numberInputId = nanoid(3);
 
   generateId = () => nanoid();
 

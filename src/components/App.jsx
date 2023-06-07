@@ -16,20 +16,35 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
-    this.setState(
-      prevState => (prevState.contacts = [...prevState.contacts, data])
-    );
+    this.setState(({ contacts }) => {
+      const isContact = contacts
+        .map(({ name }) => name.toLowerCase())
+        .includes(data.name.toLowerCase());
 
-    console.log('onSubmit', this.state.contacts);
+      if (isContact) {
+        alert(`${data.name} is already in contacts`);
+        return { contacts };
+      }
+
+      return { contacts: [...contacts, data] };
+    });
   };
 
   handleFilterChange = e => {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  render() {
+  getFilteredContacts = () => {
     const { contacts, filter } = this.state;
-    console.log(contacts);
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  render() {
+    const { filter } = this.state;
+    const filteredContacts = this.getFilteredContacts();
 
     return (
       <div>
@@ -40,7 +55,9 @@ class App extends Component {
         <div>
           <h3>Contacts</h3>
           <FilterInput value={filter} onChange={this.handleFilterChange} />
-          {contacts.length > 0 && <Contacts contacts={contacts} />}
+          {filteredContacts.length > 0 && (
+            <Contacts contacts={filteredContacts} />
+          )}
         </div>
       </div>
     );
