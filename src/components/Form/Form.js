@@ -7,8 +7,8 @@ class Form extends Component {
     number: '',
   };
 
-  nameInputId = nanoid();
-  numberInputId = nanoid();
+  nameInputId = nanoid(3);
+  numberInputId = nanoid(3);
 
   generateId = () => nanoid();
 
@@ -25,7 +25,7 @@ class Form extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
