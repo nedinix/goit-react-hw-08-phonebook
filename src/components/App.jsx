@@ -17,11 +17,11 @@ class App extends Component {
 
   formSubmitHandler = data => {
     this.setState(({ contacts }) => {
-      const isContact = contacts
+      const contactExist = contacts
         .map(({ name }) => name.toLowerCase())
         .includes(data.name.toLowerCase());
 
-      if (isContact) {
+      if (contactExist) {
         alert(`${data.name} is already in contacts`);
         return { contacts };
       }
