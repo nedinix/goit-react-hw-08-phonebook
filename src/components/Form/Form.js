@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   state = {
@@ -7,8 +8,15 @@ class Form extends Component {
     number: '',
   };
 
-  nameInputId = nanoid(3);
-  numberInputId = nanoid(3);
+  static propTypes = {
+    state: PropTypes.shape({
+      name: PropTypes.string,
+      number: PropTypes.string,
+    }),
+  };
+
+  nameInputId = nanoid();
+  numberInputId = nanoid();
 
   generateId = () => nanoid();
 

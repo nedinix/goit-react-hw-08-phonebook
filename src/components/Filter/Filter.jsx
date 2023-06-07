@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FilterInput = ({ value, onChange }) => {
   return (
@@ -11,6 +12,11 @@ const FilterInput = ({ value, onChange }) => {
       placeholder="Find contacts by name"
     />
   );
+};
+
+FilterInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default FilterInput;
