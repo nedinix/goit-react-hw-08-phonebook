@@ -4,19 +4,37 @@ import Contacts from './Contacts';
 import FilterInput from './Filter';
 import { Container } from './App.styled';
 
+const LOCAL_STORAGE_DATA = 'contacts';
+
 class App extends Component {
   state = {
-    // contacts: [],
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
+    // contacts: [
+    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    // ],
     filter: '',
   };
 
+  componentDidMount() {
+    const savedContactsState = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_DATA)
+    );
+    if (savedContactsState !== null) {
+      this.setState({ contacts: savedContactsState });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem(LOCAL_STORAGE_DATA, JSON.stringify(contacts));
+    }
+  }
   formSubmitHandler = data => {
+    console.log('data', data);
     const { contacts } = this.state;
     const contactExist = contacts
       .map(({ name }) => name.toLowerCase())

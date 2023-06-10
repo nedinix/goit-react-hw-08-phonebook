@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Field } from 'formik';
 
-export const StyledFilterInput = styled.input`
+export const StyledFilterInput = styled(Field)`
   max-width: 254px;
   width: 100%;
   display: block;

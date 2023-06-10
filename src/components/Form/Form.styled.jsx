@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Form } from 'formik';
 
-export const StyledFormPhonebook = styled.form`
+export const StyledFormPhonebook = styled(Form)`
   label {
     color: rgb(99, 99, 99);
     margin-bottom: 4px;

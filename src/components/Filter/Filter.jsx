@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledFilterInput } from './Filter.styled';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object().shape({
+  filter: yup.string(),
+});
 
 const FilterInput = ({ value, onChange }) => {
   return (
-    <StyledFilterInput
-      type="text"
-      name="filter"
-      pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-      value={value}
-      onChange={onChange}
-      placeholder="Find contacts by name"
-    />
+    <Formik inititalValue={{ value }} validationSchema={validationSchema}>
+      <StyledFilterInput
+        type="text"
+        name="filter"
+        value={value}
+        onChange={onChange}
+        placeholder="Find contacts by name"
+      />
+    </Formik>
   );
 };
 
