@@ -5,7 +5,7 @@ import FilterInput from './Filter';
 import { Container } from './App.styled';
 import { nanoid } from 'nanoid';
 
-const LOCAL_STORAGE_DATA = 'contacts';
+const CONTACTS_LS_DATA = 'contacts';
 
 class App extends Component {
   state = {
@@ -21,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     const savedContactsState = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_DATA)
+      localStorage.getItem(CONTACTS_LS_DATA)
     );
     if (savedContactsState !== null) {
       this.setState({ contacts: savedContactsState });
@@ -31,13 +31,13 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { contacts } = this.state;
     if (prevState.contacts !== contacts) {
-      localStorage.setItem(LOCAL_STORAGE_DATA, JSON.stringify(contacts));
+      localStorage.setItem(CONTACTS_LS_DATA, JSON.stringify(contacts));
     }
   }
 
   generateId = () => nanoid();
 
-  formSubmitHandler = (data, action) => {
+  onSubmitForm = (data, action) => {
     data.id = nanoid();
     console.log('data', data);
     const { contacts } = this.state;
@@ -82,7 +82,7 @@ class App extends Component {
       <Container>
         <div>
           <h3>Phonebook</h3>
-          <Form onSubmit={this.formSubmitHandler} />
+          <Form onSubmit={this.onSubmitForm} />
         </div>
         <div>
           <h3>Contacts</h3>
