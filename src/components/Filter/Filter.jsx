@@ -5,7 +5,13 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  filter: yup.string(),
+  filter: yup
+    .string()
+    .trim()
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Enter name may contain only letters, apostrophe, dash and spaces.'
+    ),
 });
 
 const FilterInput = ({ value, onChange }) => {

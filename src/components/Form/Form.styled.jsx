@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Form } from 'formik';
+import { Form, ErrorMessage } from 'formik';
 
 export const StyledFormPhonebook = styled(Form)`
   label {
@@ -25,7 +25,7 @@ export const StyledFormPhonebook = styled(Form)`
       color 100ms linear;
 
     &::placeholder {
-      color: rgb(99, 99, 99);
+      color: rgba(99, 99, 99, 0.534);
     }
 
     &:hover,
@@ -69,4 +69,10 @@ export const StyledFormPhonebookButton = styled.button`
     background-color: rgb(59, 59, 59);
     color: rgb(248, 248, 248);
   }
+`;
+
+export const StyledErrorMessage = styled(ErrorMessage)`
+  padding-top: 4px;
+  font-size: 12px;
+  color: #d40606;
 `;

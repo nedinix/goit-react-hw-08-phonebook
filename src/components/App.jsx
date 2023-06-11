@@ -3,6 +3,7 @@ import Form from './Form/Form';
 import Contacts from './Contacts';
 import FilterInput from './Filter';
 import { Container } from './App.styled';
+import { nanoid } from 'nanoid';
 
 const LOCAL_STORAGE_DATA = 'contacts';
 
@@ -33,7 +34,11 @@ class App extends Component {
       localStorage.setItem(LOCAL_STORAGE_DATA, JSON.stringify(contacts));
     }
   }
-  formSubmitHandler = data => {
+
+  generateId = () => nanoid();
+
+  formSubmitHandler = (data, action) => {
+    data.id = nanoid();
     console.log('data', data);
     const { contacts } = this.state;
     const contactExist = contacts
@@ -44,7 +49,11 @@ class App extends Component {
       alert(`${data.name} is already in contacts`);
       return { contacts };
     }
-    this.setState(({ contacts }) => ({ contacts: [...contacts, data] }));
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, data],
+    }));
+
+    action.resetForm();
   };
 
   handleFilterChange = e => {
@@ -73,7 +82,7 @@ class App extends Component {
       <Container>
         <div>
           <h3>Phonebook</h3>
-          <Form onSubmitForm={this.formSubmitHandler} />
+          <Form onSubmit={this.formSubmitHandler} />
         </div>
         <div>
           <h3>Contacts</h3>
