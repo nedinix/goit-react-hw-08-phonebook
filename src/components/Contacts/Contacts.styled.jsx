@@ -23,6 +23,7 @@ export const StyledDeleteButton = styled.button`
 
   color: rgb(99, 99, 99);
 
+  background-color: rgb(240, 240, 240);
   border: 1px solid rgb(198, 198, 198);
   border-radius: 4px;
 
@@ -31,6 +32,10 @@ export const StyledDeleteButton = styled.button`
 
   &:hover,
   &:focus {
+    color: rgb(240, 240, 240);
+
+    background-color: rgb(159, 159, 159);
+    border-color: rgb(159, 159, 159);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
