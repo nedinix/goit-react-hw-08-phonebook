@@ -8,23 +8,15 @@ import { nanoid } from 'nanoid';
 const CONTACTS_LS_DATA = 'contacts';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem(CONTACTS_LS_DATA)) || []
+  );
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const savedContactsState = JSON.parse(
-      localStorage.getItem(CONTACTS_LS_DATA)
-    );
-    if (savedContactsState !== null) {
-      setContacts(savedContactsState);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (contacts.length) {
-      localStorage.setItem(CONTACTS_LS_DATA, JSON.stringify(contacts));
-    }
-  }, [contacts]);
+  useEffect(
+    () => localStorage.setItem(CONTACTS_LS_DATA, JSON.stringify(contacts)),
+    [contacts]
+  );
 
   const onSubmitForm = (data, action) => {
     data.id = nanoid();
