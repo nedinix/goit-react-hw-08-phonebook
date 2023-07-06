@@ -1,36 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   StyledContacts,
   StyledContactsItem,
   StyledContactsNumber,
   StyledDeleteButton,
 } from './Contacts.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
+import { getContacts, getFilter } from 'redux/selectors';
 
-const Contacts = ({ contacts, onDeleteContact }) => (
-  <StyledContacts>
-    {contacts.map(({ id, name, number }) => (
-      <li key={id}>
-        <StyledContactsItem>
-          {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
-        </StyledContactsItem>
-        <StyledDeleteButton onClick={() => onDeleteContact(id)}>
-          Delete
-        </StyledDeleteButton>
-      </li>
-    ))}
-  </StyledContacts>
-);
+const Contacts = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  onDeleteContact: PropTypes.func.isRequired,
+  const filteredContacts =
+    contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    ) ?? [];
+
+  return (
+    <StyledContacts>
+      {filteredContacts.map(({ id, name, number }) => (
+        <li key={id}>
+          <StyledContactsItem>
+            {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
+          </StyledContactsItem>
+          <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
+            Delete
+          </StyledDeleteButton>
+        </li>
+      ))}
+    </StyledContacts>
+  );
 };
 
 export default Contacts;

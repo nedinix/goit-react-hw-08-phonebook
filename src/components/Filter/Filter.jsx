@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyledFilterInput } from './Filter.styled';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'redux/filterSlice';
+import { getFilter } from 'redux/selectors';
 
 const validationSchema = yup.object().shape({
   filter: yup
@@ -14,23 +16,23 @@ const validationSchema = yup.object().shape({
     ),
 });
 
-const FilterInput = ({ value, onChange }) => {
+const FilterInput = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
+  const onChangeFilter = e => dispatch(setFilter(e.currentTarget.value));
+
   return (
-    <Formik inititalValue={{ value }} validationSchema={validationSchema}>
+    <Formik inititalValue={filter} validationSchema={validationSchema}>
       <StyledFilterInput
         type="text"
         name="filter"
-        value={value}
-        onChange={onChange}
+        value={filter}
+        onChange={onChangeFilter}
         placeholder="Find contacts by name"
       />
     </Formik>
   );
-};
-
-FilterInput.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default FilterInput;

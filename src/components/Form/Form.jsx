@@ -1,6 +1,5 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import {
   StyledFormPhonebook,
   StyledFormPhonebookButton,
@@ -8,6 +7,9 @@ import {
 } from './Form.styled';
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
+import { addContact } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -33,9 +35,27 @@ const initialValues = {
   number: '',
 };
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
+  const onSubmit = (data, action) => {
+    const { name } = data;
+    const contactExist = contacts
+      .map(({ name }) => name.toLowerCase())
+      .includes(name.toLowerCase());
+
+    if (contactExist) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact(data));
+
+    action.resetForm();
+  };
 
   return (
     <Formik
@@ -71,13 +91,6 @@ const Form = ({ onSubmit }) => {
       </StyledFormPhonebook>
     </Formik>
   );
-};
-
-Form.propTypes = {
-  initialValues: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }),
 };
 
 export default Form;
