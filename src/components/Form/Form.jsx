@@ -41,17 +41,18 @@ const Form = () => {
 
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts);
+
   const onSubmit = (data, action) => {
-    const { id, name, number } = data;
+    const { name } = data;
     const contactExist = contacts
       .map(({ name }) => name.toLowerCase())
-      .includes(data.name.toLowerCase());
+      .includes(name.toLowerCase());
 
     if (contactExist) {
-      alert(`${data.name} is already in contacts`);
+      alert(`${name} is already in contacts`);
       return;
     }
-    dispatch(addContact({ id, name, number }));
+    dispatch(addContact(data));
 
     action.resetForm();
   };

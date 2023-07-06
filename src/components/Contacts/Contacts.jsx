@@ -19,10 +19,6 @@ const Contacts = () => {
       name.toLowerCase().includes(filter.toLowerCase())
     );
 
-  // const deleteContact = contactId => {
-  //   dispatch(deleteContact(contacts.filter(({ id }) => id !== contactId)));
-  // };
-
   return (
     <StyledContacts>
       {contacts.map(({ id, name, number }) => (
