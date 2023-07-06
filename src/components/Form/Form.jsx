@@ -8,6 +8,8 @@ import {
 } from './Form.styled';
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
+import { addContact } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -33,9 +35,26 @@ const initialValues = {
   number: '',
 };
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+  const onSubmit = (data, action) => {
+    const { id, name, number } = data;
+    const contactExist = contacts
+      .map(({ name }) => name.toLowerCase())
+      .includes(data.name.toLowerCase());
+
+    if (contactExist) {
+      alert(`${data.name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact({ id, name, number }));
+
+    action.resetForm();
+  };
 
   return (
     <Formik
