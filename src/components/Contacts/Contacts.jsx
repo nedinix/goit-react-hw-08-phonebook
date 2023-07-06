@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   StyledContacts,
   StyledContactsItem,
@@ -8,20 +7,21 @@ import {
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
+import { getContacts, getFilter } from 'redux/selectors';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
-  const getFilteredContacts = () =>
+  const filteredContacts =
     contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
-    );
+    ) ?? [];
 
   return (
     <StyledContacts>
-      {contacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <li key={id}>
           <StyledContactsItem>
             {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
@@ -33,17 +33,6 @@ const Contacts = () => {
       ))}
     </StyledContacts>
   );
-};
-
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
-  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default Contacts;
