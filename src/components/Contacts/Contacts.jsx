@@ -7,17 +7,17 @@ import {
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
-import { getContacts, getFilter } from 'redux/selectors';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
-  const filteredContacts =
-    contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    ) ?? [];
+  const filteredContacts = [];
+  // contacts.filter(({ name }) =>
+  //   name.toLowerCase().includes(filter.toLowerCase())
+  // ) ?? [];
 
   return (
     <StyledContacts>
@@ -26,9 +26,8 @@ const Contacts = () => {
           <StyledContactsItem>
             {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
           </StyledContactsItem>
-          <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
-            Delete
-          </StyledDeleteButton>
+          {/* <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}> */}
+          <StyledDeleteButton onClick={() => {}}>Delete</StyledDeleteButton>
         </li>
       ))}
     </StyledContacts>

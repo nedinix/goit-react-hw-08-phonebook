@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/filterSlice';
-import { getFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 
 const validationSchema = yup.object().shape({
   filter: yup
@@ -18,7 +18,7 @@ const validationSchema = yup.object().shape({
 
 const FilterInput = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
 
   const onChangeFilter = e => dispatch(setFilter(e.currentTarget.value));
 

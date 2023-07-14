@@ -7,9 +7,10 @@ import {
 } from './Form.styled';
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
-import { addContact } from 'redux/contactsSlice';
+// import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'api-service/mockapi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -20,7 +21,7 @@ const validationSchema = yup.object().shape({
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
     )
     .required(),
-  number: yup
+  phone: yup
     .string()
     .trim()
     .matches(
@@ -32,15 +33,15 @@ const validationSchema = yup.object().shape({
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 const Form = () => {
   const nameInputId = nanoid();
-  const numberInputId = nanoid();
+  const phoneInputId = nanoid();
 
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const onSubmit = (data, action) => {
     const { name } = data;
@@ -75,14 +76,14 @@ const Form = () => {
           <StyledErrorMessage name="name" component="div" />
         </div>
         <div>
-          <label htmlFor={numberInputId}>Number</label>
+          <label htmlFor={phoneInputId}>Number</label>
           <Field
-            id={numberInputId}
+            id={phoneInputId}
             type="tel"
-            name="number"
+            name="phone"
             placeholder="Enter phone number"
           />
-          <StyledErrorMessage name="number" component="div" />
+          <StyledErrorMessage name="phone" component="div" />
         </div>
 
         <StyledFormPhonebookButton type="submit">
