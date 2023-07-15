@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyledContacts,
   StyledContactsItem,
@@ -6,26 +6,33 @@ import {
   StyledDeleteButton,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
-import { getContacts, getFilter } from 'redux/selectors';
+import { fetchContacts, deleteContact } from 'redux/operations-mockapi';
+import {
+  selectIsLoading,
+  selectError,
+  selectVisibleContacts,
+} from 'redux/selectors';
+import { Loader } from 'components/Loader';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const contacts = useSelector(selectVisibleContacts);
 
-  const filteredContacts =
-    contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    ) ?? [];
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <StyledContacts>
-      {filteredContacts.map(({ id, name, number }) => (
+      {isLoading && !error && <Loader />}
+      {contacts.map(({ id, name, phone }) => (
         <li key={id}>
-          <StyledContactsItem>
-            {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
-          </StyledContactsItem>
+          <div>
+            <StyledContactsItem>{name}</StyledContactsItem>
+            <StyledContactsNumber>{phone}</StyledContactsNumber>
+          </div>
           <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
             Delete
           </StyledDeleteButton>
