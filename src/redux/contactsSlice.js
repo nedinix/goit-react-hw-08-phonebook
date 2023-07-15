@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from 'redux/operations-mockapi';
-// import { nanoid } from 'nanoid';
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+} from 'redux/operations-mockapi';
 
 const contactsInitialState = {
   items: [],
@@ -35,37 +38,12 @@ const handleDeleteContact = (state, action) => {
   const index = state.items.findIndex(
     contact => contact.id === action.payload.id
   );
-  state.items.splice(index, 1, action.payload);
+  state.items.splice(index, 1);
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
-  // reducers: {
-  //   addContact: {
-  //     reducer(state, action) {
-  //       return [...state, action.payload];
-  //     },
-  //     prepare({ name, number }) {
-  //       return {
-  //         payload: {
-  //           name,
-  //           number,
-  //           id: nanoid(),
-  //         },
-  //       };
-  //     },
-  //   },
-  //   deleteContact(state, action) {
-  //     return state.filter(({ id }) => id !== action.payload);
-  //   },
-  //   filteredContacts(state, action) {
-  //     return state.filter(({ name }) =>
-  //       name.toLowerCase().includes(action.payload.toLowerCase())
-  //     );
-  //   },
-  // },
-
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, handlePending)
@@ -78,8 +56,5 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, handleDeleteContact)
       .addCase(deleteContact.rejected, handleRejected),
 });
-
-// export const { addContact, deleteContact, filteredContacts } =
-//   contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

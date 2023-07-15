@@ -52,6 +52,12 @@ export const StyledContactsItem = styled.p`
   color: rgb(59, 59, 59);
 `;
 
-export const StyledContactsNumber = styled.span`
+export const StyledContactsNumber = styled.p`
+  margin-top: 0;
+  margin-bottom: 0;
   color: rgb(42, 104, 176);
+`;
+
+export const StyledContactsName = styled.p`
+  color: rgb(59, 59, 59);
 `;

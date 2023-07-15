@@ -6,12 +6,9 @@ import {
   StyledDeleteButton,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-// import { deleteContact } from 'redux/contactsSlice';
-import { deleteContact, fetchContacts } from 'redux/operations-mockapi';
+import { fetchContacts, deleteContact } from 'redux/operations-mockapi';
 import {
   selectIsLoading,
-  // selectContacts,
-  // selectFilter,
   selectError,
   selectVisibleContacts,
 } from 'redux/selectors';
@@ -22,9 +19,6 @@ const Contacts = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const contacts = useSelector(selectVisibleContacts);
-  // const filter = useSelector(selectFilter);
-
-  // const filteredContacts = visibleContacts(contacts, filter);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -35,9 +29,10 @@ const Contacts = () => {
       {isLoading && !error && <Loader />}
       {contacts.map(({ id, name, phone }) => (
         <li key={id}>
-          <StyledContactsItem>
-            {name}: <StyledContactsNumber>{phone}</StyledContactsNumber>
-          </StyledContactsItem>
+          <div>
+            <StyledContactsItem>{name}</StyledContactsItem>
+            <StyledContactsNumber>{phone}</StyledContactsNumber>
+          </div>
           <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
             Delete
           </StyledDeleteButton>
