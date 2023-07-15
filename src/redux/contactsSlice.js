@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContact, fetchContacts } from 'api-service/mockapi';
-import { nanoid } from 'nanoid';
+import { addContact, deleteContact, fetchContacts } from 'redux/operations-mockapi';
+// import { nanoid } from 'nanoid';
 
 const contactsInitialState = {
   items: [],
@@ -15,6 +15,27 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+};
+
+const handleFetchContacts = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.items = action.payload;
+};
+
+const handleAddContact = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.items.push(action.payload);
+};
+
+const handleDeleteContact = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  const index = state.items.findIndex(
+    contact => contact.id === action.payload.id
+  );
+  state.items.splice(index, 1, action.payload);
 };
 
 const contactsSlice = createSlice({
@@ -48,20 +69,14 @@ const contactsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(fetchContacts.pending, handlePending)
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items = action.payload;
-        // state.items.id = nanoid();
-      })
+      .addCase(fetchContacts.fulfilled, handleFetchContacts)
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.pending, handlePending)
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items.push(action.payload);
-      })
+      .addCase(addContact.fulfilled, handleAddContact)
       .addCase(addContact.rejected, handleRejected)
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.fulfilled, handleDeleteContact)
+      .addCase(deleteContact.rejected, handleRejected),
 });
 
 // export const { addContact, deleteContact, filteredContacts } =

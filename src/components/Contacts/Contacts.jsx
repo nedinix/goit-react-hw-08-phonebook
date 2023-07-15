@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyledContacts,
   StyledContactsItem,
@@ -6,28 +6,41 @@ import {
   StyledDeleteButton,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
-import { selectContacts, selectFilter } from 'redux/selectors';
+// import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact, fetchContacts } from 'redux/operations-mockapi';
+import {
+  selectIsLoading,
+  // selectContacts,
+  // selectFilter,
+  selectError,
+  selectVisibleContacts,
+} from 'redux/selectors';
+import { Loader } from 'components/Loader';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const contacts = useSelector(selectVisibleContacts);
+  // const filter = useSelector(selectFilter);
 
-  const filteredContacts = [];
-  // contacts.filter(({ name }) =>
-  //   name.toLowerCase().includes(filter.toLowerCase())
-  // ) ?? [];
+  // const filteredContacts = visibleContacts(contacts, filter);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <StyledContacts>
-      {filteredContacts.map(({ id, name, number }) => (
+      {isLoading && !error && <Loader />}
+      {contacts.map(({ id, name, phone }) => (
         <li key={id}>
           <StyledContactsItem>
-            {name}: <StyledContactsNumber>{number}</StyledContactsNumber>
+            {name}: <StyledContactsNumber>{phone}</StyledContactsNumber>
           </StyledContactsItem>
-          {/* <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}> */}
-          <StyledDeleteButton onClick={() => {}}>Delete</StyledDeleteButton>
+          <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
+            Delete
+          </StyledDeleteButton>
         </li>
       ))}
     </StyledContacts>

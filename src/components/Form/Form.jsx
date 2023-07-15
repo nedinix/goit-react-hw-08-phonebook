@@ -8,7 +8,7 @@ import {
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
 // import { addContact } from 'redux/contactsSlice';
-import { addContact } from 'api-service/mockapi';
+import { addContact } from 'redux/operations-mockapi';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 
