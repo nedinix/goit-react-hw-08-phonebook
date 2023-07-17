@@ -3,8 +3,8 @@ import { StyledFilterInput } from './Filter.styled';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/contacts/selectors';
+import { setFilter } from 'redux/contacts/filter-slice';
 
 const validationSchema = yup.object().shape({
   filter: yup
