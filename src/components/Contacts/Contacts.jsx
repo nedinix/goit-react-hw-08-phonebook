@@ -6,12 +6,15 @@ import {
   StyledDeleteButton,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from 'redux/operations';
+import {
+  fetchContacts,
+  deleteContact,
+} from 'redux/contacts/contacts-operations';
 import {
   selectIsLoading,
   selectError,
   selectVisibleContacts,
-} from 'redux/selectors';
+} from 'redux/contacts/selectors';
 import { Loader } from 'components/Loader';
 
 const Contacts = () => {

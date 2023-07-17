@@ -38,7 +38,7 @@ export const StyledFormPhonebook = styled(Form)`
     }
   }
 
-  & > div {
+  & div {
     display: flex;
     flex-direction: column;
 
@@ -77,4 +77,11 @@ export const StyledErrorMessage = styled(ErrorMessage)`
   padding-top: 4px;
   font-size: 12px;
   color: #d40606;
+`;
+
+export const FormContainer = styled.div`
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 260px;
 `;

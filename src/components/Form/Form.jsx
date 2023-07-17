@@ -4,13 +4,14 @@ import {
   StyledFormPhonebook,
   StyledFormPhonebookButton,
   StyledErrorMessage,
+  FormContainer,
 } from './Form.styled';
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
 // import { addContact } from 'redux/contactsSlice';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -65,30 +66,33 @@ const Form = () => {
       onSubmit={onSubmit}
     >
       <StyledFormPhonebook>
-        <div>
-          <label htmlFor={nameInputId}>Name</label>
-          <Field
-            id={nameInputId}
-            type="text"
-            name="name"
-            placeholder="Enter name"
-          />
-          <StyledErrorMessage name="name" component="div" />
-        </div>
-        <div>
-          <label htmlFor={phoneInputId}>Number</label>
-          <Field
-            id={phoneInputId}
-            type="tel"
-            name="phone"
-            placeholder="Enter phone number"
-          />
-          <StyledErrorMessage name="phone" component="div" />
-        </div>
+        <FormContainer>
+          <h3>Phonebook</h3>
+          <div>
+            <label htmlFor={nameInputId}>Name</label>
+            <Field
+              id={nameInputId}
+              type="text"
+              name="name"
+              placeholder="Enter name"
+            />
+            <StyledErrorMessage name="name" component="div" />
+          </div>
+          <div>
+            <label htmlFor={phoneInputId}>Number</label>
+            <Field
+              id={phoneInputId}
+              type="tel"
+              name="phone"
+              placeholder="Enter phone number"
+            />
+            <StyledErrorMessage name="phone" component="div" />
+          </div>
 
-        <StyledFormPhonebookButton type="submit">
-          Add Contact
-        </StyledFormPhonebookButton>
+          <StyledFormPhonebookButton type="submit">
+            Add Contact
+          </StyledFormPhonebookButton>
+        </FormContainer>
       </StyledFormPhonebook>
     </Formik>
   );
