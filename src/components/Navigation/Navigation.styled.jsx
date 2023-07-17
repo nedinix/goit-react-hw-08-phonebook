@@ -1,27 +1,41 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const NavWrapper = styled.div`
-  background-color: rgb(27, 175, 201);
+  background-color: rgb(245, 245, 245);
+  border-bottom: 1px solid rgb(27, 31, 35);
+`;
 
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+export const NavLinkStyled = styled(NavLink)`
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
-  & a {
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
-    color: rgb(241, 241, 241);
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(27, 31, 35);
+  text-decoration: none;
+
+  &:not(:last-child) {
+    margin-right: 4px;
   }
 
-  & a:not(:last-child) {
-    margin-right: 12px;
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+
+  &.active {
+    border-bottom: 4px solid rgb(235, 104, 18);
+    color: rgb(235, 104, 18);
   }
 `;
 
-export const NavMenu = styled.div`
-  /* display: block;
-  margin-left: auto;
-  margin-right: auto; */
+export const NavBlock = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const NavContainer = styled.nav`
@@ -30,8 +44,6 @@ export const NavContainer = styled.nav`
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 24px;
-  padding-bottom: 24px;
   box-sizing: border-box;
 
   display: flex;

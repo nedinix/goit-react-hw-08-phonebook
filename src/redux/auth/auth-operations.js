@@ -12,18 +12,6 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const currentUser = createAsyncThunk(
-  'auth/currentUser',
-  async (credentials, thunkAPI) => {
-    try {
-      const response = await axios.get('/users/current', credentials);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -37,7 +25,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const logInUser = createAsyncThunk(
+export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
@@ -56,6 +44,18 @@ export const logoutUser = createAsyncThunk(
     try {
       await axios.post('/users/logout');
       clearAuthHeader();
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const currentUser = createAsyncThunk(
+  'auth/currentUser',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.get('/users/current', credentials);
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

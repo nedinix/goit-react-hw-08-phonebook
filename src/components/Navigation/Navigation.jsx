@@ -1,19 +1,22 @@
-import { NavContainer, NavMenu, NavWrapper } from './Navigation.styled';
-
-const { NavLink } = require('react-router-dom');
+import {
+  NavWrapper,
+  NavContainer,
+  NavBlock,
+  NavLinkStyled,
+} from './Navigation.styled';
 
 const Navigation = () => {
   return (
     <NavWrapper>
       <NavContainer>
-        <NavMenu>
-          <NavLink to="/">home</NavLink>
-          <NavLink to="/contacts">contacts</NavLink>
-        </NavMenu>
-        <NavMenu>
-          <NavLink to="/login">login</NavLink>
-          <NavLink to="/register">register</NavLink>
-        </NavMenu>
+        <NavBlock>
+          <NavLinkStyled to="/">home</NavLinkStyled>
+          <NavLinkStyled to="/contacts">contacts</NavLinkStyled>
+        </NavBlock>
+        <NavBlock>
+          <NavLinkStyled to="/login">login</NavLinkStyled>
+          <NavLinkStyled to="/register">register</NavLinkStyled>
+        </NavBlock>
       </NavContainer>
     </NavWrapper>
   );

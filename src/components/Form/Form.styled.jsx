@@ -53,9 +53,9 @@ export const StyledFormPhonebookButton = styled.button`
 
   color: rgb(241, 241, 241);
 
-  border: 1px solid rgb(27, 175, 201);
+  border: 1px solid rgb(235, 104, 18);
   border-radius: 4px;
-  background-color: rgb(53, 155, 173);
+  background-color: rgb(235, 104, 18);
 
   transition: box-shadow 150ms linear, background-color 100ms linear,
     color 100ms linear;
@@ -63,7 +63,7 @@ export const StyledFormPhonebookButton = styled.button`
   &:hover,
   &:focus {
     background-color: rgb(241, 241, 241);
-    color: rgb(53, 155, 173);
+    color: rgb(235, 104, 18);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 
