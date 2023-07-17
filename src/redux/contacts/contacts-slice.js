@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  addContact,
-  deleteContact,
-  fetchContacts,
-} from 'redux/operations-mockapi';
+import { addContact, deleteContact, fetchContacts } from 'redux/operations';
 
 const contactsInitialState = {
   items: [],

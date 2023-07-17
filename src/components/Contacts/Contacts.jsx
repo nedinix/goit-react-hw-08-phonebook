@@ -6,7 +6,7 @@ import {
   StyledDeleteButton,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from 'redux/operations-mockapi';
+import { fetchContacts, deleteContact } from 'redux/operations';
 import {
   selectIsLoading,
   selectError,
