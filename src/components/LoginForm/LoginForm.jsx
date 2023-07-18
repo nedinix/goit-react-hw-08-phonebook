@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from 'redux/auth/auth-operations';
 import { nanoid } from 'nanoid';
 import * as yup from 'yup';
+import { useAuth } from 'hooks';
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -36,10 +37,11 @@ const LoginForm = () => {
   const passwordInputId = nanoid();
 
   const dispatch = useDispatch();
+  const { isLoggedIn } = useAuth();
 
   const onSubmit = (data, action) => {
     dispatch(loginUser(data));
-    action.resetForm();
+    if (isLoggedIn) action.resetForm();
   };
 
   return (
