@@ -34,7 +34,7 @@ const Contacts = () => {
       {contacts.map(({ id, name, number }) => (
         <li key={id}>
           <ContactWrapper>
-            <ContactsItem>{name}</ContactsItem>
+            <ContactsItem>{name}:</ContactsItem>
             <ContactsNumber>{number}</ContactsNumber>
           </ContactWrapper>
           <DeleteButton onClick={() => dispatch(deleteContact(id))}>
