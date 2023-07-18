@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import Form from 'components/Form';
-import ContactList from 'components/ContactsList/ContactList';
+import ContactsForm from 'components/ContactsForm';
+import ContactsList from 'components/ContactsList';
 import { Loader } from 'components/Loader';
 import { fetchContacts } from 'redux/contacts/contacts-operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
@@ -18,9 +18,9 @@ const ContactsPage = () => {
     <>
       {isLoading && <Loader />}
       <>
-        <Form />
-
-        <ContactList />
+        <h2>Phonebook</h2>
+        <ContactsForm />
+        <ContactsList />
       </>
     </>
   );

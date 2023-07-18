@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import {
   StyledContacts,
-  StyledContactsItem,
-  StyledContactsNumber,
-  StyledDeleteButton,
+  ContactsItem,
+  ContactsNumber,
+  DeleteButton,
+  ContactWrapper,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -30,15 +31,15 @@ const Contacts = () => {
   return (
     <StyledContacts>
       {isLoading && !error && <Loader />}
-      {contacts.map(({ id, name, phone }) => (
+      {contacts.map(({ id, name, number }) => (
         <li key={id}>
-          <div>
-            <StyledContactsItem>{name}</StyledContactsItem>
-            <StyledContactsNumber>{phone}</StyledContactsNumber>
-          </div>
-          <StyledDeleteButton onClick={() => dispatch(deleteContact(id))}>
+          <ContactWrapper>
+            <ContactsItem>{name}</ContactsItem>
+            <ContactsNumber>{number}</ContactsNumber>
+          </ContactWrapper>
+          <DeleteButton onClick={() => dispatch(deleteContact(id))}>
             Delete
-          </StyledDeleteButton>
+          </DeleteButton>
         </li>
       ))}
     </StyledContacts>

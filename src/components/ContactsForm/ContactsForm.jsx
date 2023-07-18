@@ -1,12 +1,12 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import {
-  StyledFormPhonebook,
   StyledFormPhonebookButton,
   StyledErrorMessage,
   FormContainer,
-} from './Form.styled';
-import { Field, Formik } from 'formik';
+  FieldWrapper,
+} from './ContactsForm.styled';
+import { Field, Formik, Form } from 'formik';
 import * as yup from 'yup';
 import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
     )
     .required(),
-  phone: yup
+  number: yup
     .string()
     .trim()
     .matches(
@@ -36,7 +36,7 @@ const initialValues = {
   number: '',
 };
 
-const Form = () => {
+const ContactsForm = () => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
@@ -45,6 +45,9 @@ const Form = () => {
 
   const onSubmit = (data, action) => {
     const { name } = data;
+
+    console.log(data);
+
     const contactExist = contacts
       .map(({ name }) => name.toLowerCase())
       .includes(name.toLowerCase());
@@ -64,10 +67,9 @@ const Form = () => {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      <StyledFormPhonebook>
+      <Form>
         <FormContainer>
-          <h3>Phonebook</h3>
-          <div>
+          <FieldWrapper>
             <label htmlFor={nameInputId}>Name</label>
             <Field
               id={nameInputId}
@@ -76,8 +78,8 @@ const Form = () => {
               placeholder="Enter name"
             />
             <StyledErrorMessage name="name" component="div" />
-          </div>
-          <div>
+          </FieldWrapper>
+          <FieldWrapper>
             <label htmlFor={numberInputId}>Number</label>
             <Field
               id={numberInputId}
@@ -86,15 +88,14 @@ const Form = () => {
               placeholder="Enter phone number"
             />
             <StyledErrorMessage name="number" component="div" />
-          </div>
-
-          <StyledFormPhonebookButton type="submit">
-            Add Contact
-          </StyledFormPhonebookButton>
+          </FieldWrapper>
         </FormContainer>
-      </StyledFormPhonebook>
+        <StyledFormPhonebookButton type="submit">
+          Add Contact
+        </StyledFormPhonebookButton>
+      </Form>
     </Formik>
   );
 };
 
-export default Form;
+export default ContactsForm;
