@@ -1,13 +1,13 @@
 import FilterInput from 'components/Filter';
 import Contacts from 'components/Contacts';
-import { ListContainer } from './ContactList.styled';
+import { Header, ListContainer } from './ContactsList.styled';
 
-const ContactList = () => (
+const ContactsList = () => (
   <ListContainer>
-    <h3>Contacts</h3>
+    <Header>Contacts</Header>
     <FilterInput />
     <Contacts />
   </ListContainer>
 );
 
-export default ContactList;
+export default ContactsList;

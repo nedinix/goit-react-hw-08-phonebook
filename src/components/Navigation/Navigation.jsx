@@ -1,19 +1,24 @@
-import { NavContainer, NavMenu, NavWrapper } from './Navigation.styled';
-
-const { NavLink } = require('react-router-dom');
+import { useAuth } from 'hooks';
+import {
+  NavWrapper,
+  NavContainer,
+  NavBlock,
+  NavLinkStyled,
+} from './Navigation.styled';
+import AuthNav from 'components/AuthNav/AuthNav';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 const Navigation = () => {
+  const { isLoggedIn } = useAuth();
+  console.log('isLoggedIn', isLoggedIn);
   return (
     <NavWrapper>
       <NavContainer>
-        <NavMenu>
-          <NavLink to="/">home</NavLink>
-          <NavLink to="/contacts">contacts</NavLink>
-        </NavMenu>
-        <NavMenu>
-          <NavLink to="/login">login</NavLink>
-          <NavLink to="/register">register</NavLink>
-        </NavMenu>
+        <NavBlock>
+          <NavLinkStyled to="/">home</NavLinkStyled>
+          {isLoggedIn && <NavLinkStyled to="/contacts">contacts</NavLinkStyled>}
+        </NavBlock>
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </NavContainer>
     </NavWrapper>
   );

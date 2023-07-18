@@ -17,14 +17,14 @@ export const StyledContacts = styled.ul`
   }
 `;
 
-export const StyledDeleteButton = styled.button`
+export const DeleteButton = styled.button`
   display: block;
   height: 28px;
 
-  color: rgb(99, 99, 99);
+  color: rgba(99, 99, 99, 0.5);
 
-  background-color: rgb(240, 240, 240);
-  border: 1px solid rgb(198, 198, 198);
+  background-color: rgba(240, 240, 240, 0.3);
+  border: 1px solid rgba(198, 198, 198, 0.3);
   border-radius: 4px;
 
   transition: box-shadow 150ms linear, background-color 100ms linear,
@@ -45,19 +45,26 @@ export const StyledDeleteButton = styled.button`
   }
 `;
 
-export const StyledContactsItem = styled.p`
+export const ContactWrapper = styled.div`
+  display: flex;
+`;
+
+export const ContactsItem = styled.p`
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 8px;
+  font-weight: 600;
   color: rgb(59, 59, 59);
+  margin-right: 12px;
 `;
 
-export const StyledContactsNumber = styled.p`
+export const ContactsNumber = styled.p`
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: 600;
   color: rgb(42, 104, 176);
 `;
 
-export const StyledContactsName = styled.p`
+export const ContactsName = styled.p`
   color: rgb(59, 59, 59);
 `;

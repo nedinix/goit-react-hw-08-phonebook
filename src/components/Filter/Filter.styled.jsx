@@ -6,6 +6,8 @@ export const StyledFilterInput = styled(Field)`
   width: 100%;
   display: block;
   height: 28px;
+  /* margin-right: auto;
+  margin-left: auto; */
 
   padding-left: 4px;
 
