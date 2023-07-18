@@ -39,7 +39,6 @@ const LoginForm = () => {
 
   const onSubmit = (data, action) => {
     dispatch(loginUser(data));
-
     action.resetForm();
   };
 
