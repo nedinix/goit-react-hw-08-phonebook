@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import {
   StyledContacts,
   ContactsItem,
@@ -7,10 +6,7 @@ import {
   ContactWrapper,
 } from './Contacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchContacts,
-  deleteContact,
-} from 'redux/contacts/contacts-operations';
+import { deleteContact } from 'redux/contacts/contacts-operations';
 import {
   selectIsLoading,
   selectError,
@@ -22,10 +18,6 @@ const Contacts = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const contacts = useSelector(selectVisibleContacts);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   return (
     <StyledContacts>
