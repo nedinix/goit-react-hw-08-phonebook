@@ -65,7 +65,7 @@ export const currentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      toast('Unable to fetch user');
+      toast('Unable to authorization user');
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
 
