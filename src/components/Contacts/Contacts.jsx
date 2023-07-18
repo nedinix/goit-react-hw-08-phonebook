@@ -16,7 +16,6 @@ import {
   selectError,
   selectVisibleContacts,
 } from 'redux/contacts/selectors';
-import { Loader } from 'components/Loader';
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ const Contacts = () => {
 
   return (
     <StyledContacts>
-      {/* {isLoading && !error && <Loader />} */}
       {isLoading && !error && <p>Loading...</p>}
       {contacts.map(({ id, name, number }) => (
         <li key={id}>
