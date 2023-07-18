@@ -10,7 +10,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 
 const Navigation = () => {
   const { isLoggedIn } = useAuth();
-  console.log('isLoggedIn', isLoggedIn);
+
   return (
     <NavWrapper>
       <NavContainer>

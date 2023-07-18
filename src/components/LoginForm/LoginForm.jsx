@@ -18,12 +18,12 @@ const validationSchema = yup.object().shape({
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
       'Invalid email address'
     )
-    .required('Required'),
+    .required('Enter your email address'),
   password: yup
     .string()
     .min(8, 'minimum 8 characters ')
     .max(20, 'max 20 characters')
-    .required('Required'),
+    .required('Enter your password'),
 });
 
 const initialValues = {

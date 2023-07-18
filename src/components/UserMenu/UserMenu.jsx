@@ -6,8 +6,6 @@ import { LogoutButton, UserInfo, UserMenuBlock } from './UserMenu.styled';
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
-  console.log(user);
-
   return (
     <UserMenuBlock>
       <UserInfo>Welcome, {user}</UserInfo>
