@@ -5,6 +5,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const setAuthHeader = token => {
+  console.log(token);
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -17,6 +18,7 @@ export const registerUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/signup', credentials);
+      console.log(data);
       setAuthHeader(data.token);
       return data;
     } catch (e) {
@@ -55,6 +57,7 @@ export const currentUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.get('/users/current', credentials);
+      console.log(response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
