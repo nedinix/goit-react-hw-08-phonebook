@@ -17,7 +17,7 @@ const Layout = () => {
         </main>
         <Footer />
       </Container>
-      <Toaster />
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 };

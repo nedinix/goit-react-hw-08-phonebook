@@ -46,8 +46,6 @@ const ContactsForm = () => {
   const onSubmit = (data, action) => {
     const { name } = data;
 
-    console.log(data);
-
     const contactExist = contacts
       .map(({ name }) => name.toLowerCase())
       .includes(name.toLowerCase());

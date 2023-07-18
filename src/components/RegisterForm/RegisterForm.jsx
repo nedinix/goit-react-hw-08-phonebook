@@ -18,7 +18,7 @@ const validationSchema = yup.object().shape({
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
       'Name may contain only letters, apostrophe, dash and spaces.'
     )
-    .required(),
+    .required('Enter your name'),
   email: yup
     .string()
     .trim()
@@ -26,12 +26,12 @@ const validationSchema = yup.object().shape({
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
       'Invalid email address'
     )
-    .required('Required'),
+    .required('Enter your email address'),
   password: yup
     .string()
     .min(8, 'minimum 8 characters ')
     .max(20, 'max 20 characters')
-    .required('Required'),
+    .required('Enter your password'),
 });
 
 const initialValues = {

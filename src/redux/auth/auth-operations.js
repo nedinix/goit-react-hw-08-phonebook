@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-// axios.defaults.baseURL = 'https://64afa4aec60b8f941af45529.mockapi.io/api/';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const setAuthHeader = token => {
@@ -19,9 +18,12 @@ export const registerUser = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/signup', credentials);
       setAuthHeader(data.token);
+      toast.success(
+        `You have successfully registered. Welcome, ${data.user.name} !`
+      );
       return data;
     } catch (e) {
-      toast.error(e.message);
+      toast.error('Authorization error. Try again, please');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -33,9 +35,10 @@ export const loginUser = createAsyncThunk(
     try {
       const { data } = await axios.post('/users/login', credentials);
       setAuthHeader(data.token);
+      toast.success(`Welcome, ${data.user.name} !`);
       return data;
     } catch (e) {
-      toast.error(e.message);
+      toast.error('Authorization error. Try again, please');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -47,8 +50,9 @@ export const logoutUser = createAsyncThunk(
     try {
       await axios.post('/users/logout');
       clearAuthHeader();
+      toast('You are logged out');
     } catch (e) {
-      toast.error(e.message);
+      toast.error('Authorization error. Try again, please');
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -61,16 +65,16 @@ export const currentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      toast.error('Unable to fetch user');
+      toast('Unable to fetch user');
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
 
     try {
       setAuthHeader(persistedToken);
-      const response = await axios.get('/users/current', credentials);
-      return response.data;
+      const { data } = await axios.get('/users/current', credentials);
+      return data;
     } catch (e) {
-      toast.error(e.message);
+      toast(e.response.statusText);
       return thunkAPI.rejectWithValue(e.message);
     }
   }
