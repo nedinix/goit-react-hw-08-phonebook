@@ -23,7 +23,7 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .min(8, 'minimum 8 characters ')
-    .max(20, 'max 20 characters')
+    .max(32, 'maximum 32 characters')
     .required('Enter your password'),
 });
 
