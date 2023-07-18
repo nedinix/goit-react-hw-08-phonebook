@@ -48,7 +48,6 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data, action) => {
-    console.log(data);
     dispatch(registerUser(data));
     action.resetForm();
   };
