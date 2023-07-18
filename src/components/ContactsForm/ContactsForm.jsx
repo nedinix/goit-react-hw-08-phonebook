@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selectors';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -51,11 +52,10 @@ const ContactsForm = () => {
       .includes(name.toLowerCase());
 
     if (contactExist) {
-      alert(`${name} is already in contacts`);
+      toast(`${name} is already in contacts`);
       return;
     }
     dispatch(addContact(data));
-
     action.resetForm();
   };
 

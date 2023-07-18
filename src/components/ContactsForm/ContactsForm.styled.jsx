@@ -53,7 +53,8 @@ export const FieldWrapper = styled.div`
 
   label {
     display: block;
-    color: rgb(99, 99, 99);
+    font-size: 14px;
+    color: rgb(124, 124, 124);
     margin-bottom: 4px;
     margin-right: 8px;
   }
