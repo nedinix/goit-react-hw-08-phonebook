@@ -6,6 +6,7 @@ import {
   NavLinkStyled,
 } from './Navigation.styled';
 import AuthNav from 'components/AuthNav/AuthNav';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 const Navigation = () => {
   const { isLoggedIn } = useAuth();
@@ -17,10 +18,7 @@ const Navigation = () => {
           <NavLinkStyled to="/">home</NavLinkStyled>
           {isLoggedIn && <NavLinkStyled to="/contacts">contacts</NavLinkStyled>}
         </NavBlock>
-
-        {/* <NavLinkStyled to="/login">login</NavLinkStyled>
-          <NavLinkStyled to="/register">register</NavLinkStyled> */}
-        <AuthNav />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </NavContainer>
     </NavWrapper>
   );

@@ -33,12 +33,12 @@ const validationSchema = yup.object().shape({
 
 const initialValues = {
   name: '',
-  phone: '',
+  number: '',
 };
 
 const Form = () => {
   const nameInputId = nanoid();
-  const phoneInputId = nanoid();
+  const numberInputId = nanoid();
 
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
@@ -78,14 +78,14 @@ const Form = () => {
             <StyledErrorMessage name="name" component="div" />
           </div>
           <div>
-            <label htmlFor={phoneInputId}>Number</label>
+            <label htmlFor={numberInputId}>Number</label>
             <Field
-              id={phoneInputId}
+              id={numberInputId}
               type="tel"
-              name="phone"
+              name="number"
               placeholder="Enter phone number"
             />
-            <StyledErrorMessage name="phone" component="div" />
+            <StyledErrorMessage name="number" component="div" />
           </div>
 
           <StyledFormPhonebookButton type="submit">
