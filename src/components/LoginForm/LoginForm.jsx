@@ -10,6 +10,7 @@ import { loginUser } from 'redux/auth/auth-operations';
 import { nanoid } from 'nanoid';
 import * as yup from 'yup';
 import { useAuth } from 'hooks';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -40,7 +41,12 @@ const LoginForm = () => {
   const { isLoggedIn } = useAuth();
 
   const onSubmit = (data, action) => {
-    dispatch(loginUser(data));
+    dispatch(loginUser(data))
+      .unwrap()
+      .then(r => toast.success(`Welcome, ${r.user.name} !`))
+      .catch(() => {
+        toast.error('Authorization error. Try again, please');
+      });
     if (isLoggedIn) action.resetForm();
   };
 

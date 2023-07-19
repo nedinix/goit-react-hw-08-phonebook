@@ -7,6 +7,7 @@ import { useAuth } from 'hooks';
 import { lazy, useEffect } from 'react';
 import { currentUser } from 'redux/auth/auth-operations';
 import { Loader } from './Loader';
+import { toast } from 'react-hot-toast';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage'));
@@ -19,7 +20,9 @@ const App = () => {
   const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(currentUser());
+    dispatch(currentUser())
+      .unwrap()
+      .catch(e => toast(e));
   }, [dispatch]);
 
   return isRefreshing ? (
