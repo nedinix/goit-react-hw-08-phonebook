@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from 'redux/auth/auth-operations';
 import { nanoid } from 'nanoid';
 import * as yup from 'yup';
+import { toast } from 'react-hot-toast';
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -48,7 +49,14 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data, action) => {
-    dispatch(registerUser(data));
+    dispatch(registerUser(data))
+      .unwrap()
+      .then(r =>
+        toast.success(
+          `You have successfully registered. Welcome, ${r.user.name} !`
+        )
+      )
+      .catch(() => toast.error('Registration error. Try again, please'));
     action.resetForm();
   };
 

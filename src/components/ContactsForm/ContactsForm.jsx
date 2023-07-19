@@ -55,7 +55,10 @@ const ContactsForm = () => {
       toast(`${name} is already in contacts`);
       return;
     }
-    dispatch(addContact(data));
+    dispatch(addContact(data))
+      .unwrap()
+      .then(r => toast.success(`Successfully added contact: ${r.name}`))
+      .catch(() => toast.error('Error. Something wrong.'));
     action.resetForm();
   };
 

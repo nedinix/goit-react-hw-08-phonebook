@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import {
   StyledContacts,
   ContactsItem,
@@ -19,6 +20,12 @@ const Contacts = () => {
   const error = useSelector(selectError);
   const contacts = useSelector(selectVisibleContacts);
 
+  const handleDelete = id =>
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(r => toast(`Successfully deleted contact: ${r.name}`))
+      .catch(() => toast.error('Error. Something wrong.'));
+
   return (
     <StyledContacts>
       {isLoading && !error && <p>Loading...</p>}
@@ -28,9 +35,7 @@ const Contacts = () => {
             <ContactsItem>{name}:</ContactsItem>
             <ContactsNumber>{number}</ContactsNumber>
           </ContactWrapper>
-          <DeleteButton onClick={() => dispatch(deleteContact(id))}>
-            Delete
-          </DeleteButton>
+          <DeleteButton onClick={() => handleDelete(id)}>Delete</DeleteButton>
         </li>
       ))}
     </StyledContacts>
